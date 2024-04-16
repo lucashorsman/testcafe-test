@@ -21,6 +21,15 @@ class NavBar {
     await testController.click('#login-dropdown-sign-in');
   }
 
+  async gotoListStuffPage(testController) {
+    const visible = await Selector('#basic-navbar-nav').visible;
+    if (!visible) {
+      await testController.click('button.navbar-toggler');
+    }
+    await testController.click('#list-stuff-nav');
+
+  }
+
   /** Check that the specified user is currently logged in. */
   async isLoggedIn(testController, username) {
     const visible = await Selector('#basic-navbar-nav').visible;

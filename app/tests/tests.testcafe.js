@@ -2,7 +2,8 @@ import { landingPage } from './landing.page';
 import { signinPage } from './signin.page';
 import { signoutPage } from './signout.page';
 import { navBar } from './navbar.component';
-
+// eslint-disable-next-line import/named
+import { liststuffPage } from './ListStuff.page';
 /* global fixture:false, test:false */
 
 /** Credentials for one of the sample users defined in settings.development.json. */
@@ -13,6 +14,14 @@ fixture('meteor-application-template-react localhost test with default db')
 
 test('Test that landing page shows up', async (testController) => {
   await landingPage.isDisplayed(testController);
+});
+
+test('Test the List Stuff page', async (testController) => {
+  await navBar.gotoSignInPage(testController);
+  await signinPage.signin(testController, credentials.username, credentials.password);
+  await navBar.gotoListStuffPage(testController);
+  await liststuffPage.isDisplayed(testController);
+  await liststuffPage.hasTable(testController);
 });
 
 test('Test that signin and signout work', async (testController) => {
